@@ -65,6 +65,6 @@ class DatasetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dataset_params
-      params.require(:dataset).permit(:image, :uvf, :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos)
+      params.require(:dataset).permit(:image, :uvf, :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :session_id, :source_id, :band_id)
     end
 end

@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= form.label :image %>
-    <%= form.text_field :image %>
+    <%= form.file_field :image %>
   </div>
 
   <div class="field">
     <%= form.label :uvf %>
-    <%= form.text_field :uvf %>
+    <%= form.file_field :uvf %>
   </div>
 
   <div class="field">
@@ -49,6 +49,21 @@
   <div class="field">
     <%= form.label :beam_pos %>
     <%= form.text_field :beam_pos %>
+  </div>
+
+  <div class="field">
+    <%= form.label :source_id, class: "form-label" %>
+    <%= collection_select(:dataset,:source_id,Source.order('be1950name ASC'), :id, :be1950name, {},{ :multiple => false, class: "form-select"}) %>
+  </div>
+
+   <div class="field">
+    <%= form.label :band_id, class: "form-label" %>
+    <%= collection_select(:dataset,:band_id,Band.order('name ASC'), :id, :name, {},{ :multiple => false, class: "form-select"}) %>
+  </div>
+
+   <div class="field">
+    <%= form.label :session_id, class: "form-label" %>
+    <%= collection_select(:dataset,:session_id,Session.order('data ASC'), :id, :data, {},{ :multiple => false, class: "form-select"}) %>
   </div>
 
   <div class="actions">

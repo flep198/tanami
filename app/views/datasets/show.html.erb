@@ -2,12 +2,12 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @dataset.image %>
+ <%= image_tag(@dataset.image) %>
 </p>
 
 <p>
   <strong>Uvf:</strong>
-  <%= @dataset.uvf %>
+  <%= link_to 'uvf Download', @dataset.uvf %>
 </p>
 
 <p>
