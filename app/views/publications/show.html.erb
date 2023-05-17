@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Authors:</strong>
+  <%= @publication.authors %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @publication.title %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @publication.reference %>
+</p>
+
+<p>
+  <strong>Ads link:</strong>
+  <%= @publication.ads_link %>
+</p>
+
+<p>
+  <strong>Arxiv link:</strong>
+  <%= @publication.arxiv_link %>
+</p>
+
+<p>
+  <strong>Pdf link:</strong>
+  <%= @publication.pdf_link %>
+</p>
+
+<%= link_to 'Edit', edit_publication_path(@publication) %> |
+<%= link_to 'Back', publications_path %>

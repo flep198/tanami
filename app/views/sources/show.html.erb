@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Be1950name:</strong>
+  <%= @source.be1950name %>
+</p>
+
+<p>
+  <strong>Alt name:</strong>
+  <%= @source.alt_name %>
+</p>
+
+<p>
+  <strong>Ra:</strong>
+  <%= @source.ra %>
+</p>
+
+<p>
+  <strong>Decl:</strong>
+  <%= @source.decl %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @source.comment %>
+</p>
+
+<p>
+  <strong>Atca link:</strong>
+  <%= @source.atca_link %>
+</p>
+
+<p>
+  <strong>Source Type:</strong>
+  <%= @source.source_type %>
+</p>
+
+<p>
+  <strong>Redshift:</strong>
+  <%= @source.redshift %>
+</p>
+
+<%= link_to 'Edit', edit_source_path(@source) %> |
+<%= link_to 'Back', sources_path %>

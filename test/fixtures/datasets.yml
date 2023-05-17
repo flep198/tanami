@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  image: MyString
+  uvf: MyString
+  rms: 1.5
+  lowest_contour: 1.5
+  peak_flux: 1.5
+  beam_maj: 1.5
+  beam_min: 1.5
+  beam_pos: 1.5
+
+two:
+  image: MyString
+  uvf: MyString
+  rms: 1.5
+  lowest_contour: 1.5
+  peak_flux: 1.5
+  beam_maj: 1.5
+  beam_min: 1.5
+  beam_pos: 1.5

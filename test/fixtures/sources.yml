@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  be1950name: MyString
+  alt_name: MyString
+  ra: MyString
+  decl: MyString
+  comment: MyText
+  atca_link: MyString
+  type: 
+  redshift: 1.5
+
+two:
+  be1950name: MyString
+  alt_name: MyString
+  ra: MyString
+  decl: MyString
+  comment: MyText
+  atca_link: MyString
+  type: 
+  redshift: 1.5

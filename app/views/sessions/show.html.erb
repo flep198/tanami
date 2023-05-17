@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @session.data %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @session.comment %>
+</p>
+
+<p>
+  <strong>Obs code:</strong>
+  <%= @session.obs_code %>
+</p>
+
+<%= link_to 'Edit', edit_session_path(@session) %> |
+<%= link_to 'Back', sessions_path %>

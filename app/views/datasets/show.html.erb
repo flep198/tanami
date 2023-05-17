@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @dataset.image %>
+</p>
+
+<p>
+  <strong>Uvf:</strong>
+  <%= @dataset.uvf %>
+</p>
+
+<p>
+  <strong>Rms:</strong>
+  <%= @dataset.rms %>
+</p>
+
+<p>
+  <strong>Lowest contour:</strong>
+  <%= @dataset.lowest_contour %>
+</p>
+
+<p>
+  <strong>Peak flux:</strong>
+  <%= @dataset.peak_flux %>
+</p>
+
+<p>
+  <strong>Beam maj:</strong>
+  <%= @dataset.beam_maj %>
+</p>
+
+<p>
+  <strong>Beam min:</strong>
+  <%= @dataset.beam_min %>
+</p>
+
+<p>
+  <strong>Beam pos:</strong>
+  <%= @dataset.beam_pos %>
+</p>
+
+<%= link_to 'Edit', edit_dataset_path(@dataset) %> |
+<%= link_to 'Back', datasets_path %>
