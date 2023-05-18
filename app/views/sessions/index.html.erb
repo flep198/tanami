@@ -4,32 +4,33 @@
   <div class="w3-content">
   <h1>Sessions</h1>
 
-  <table>
+<div class="w3-responsive">
+    <table class="w3-table-all">
     <thead>
       <tr>
-        <th>Data</th>
+        <th>Date</th>
         <th>Comment</th>
         <th>Obs code</th>
-        <th colspan="3"></th>
+        <th colspan="2"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @sessions.each do |session| %>
         <tr>
-          <td><%= session.data %></td>
+          <td><%= link_to session.data, session %></td>
           <td><%= session.comment %></td>
           <td><%= session.obs_code %></td>
-          <td><%= link_to 'Show', session %></td>
-          <td><%= link_to 'Edit', edit_session_path(session) %></td>
-          <td><%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_session_path(session), class: "w3-btn w3-green" %></td>
+          <td><%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
 
   <br>
 
-  <%= link_to 'New Session', new_session_path %>
+  <%= link_to 'New Session', new_session_path, class: "w3-btn w3-blue" %>
 </div>
 </div>

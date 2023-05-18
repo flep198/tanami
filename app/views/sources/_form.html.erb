@@ -11,47 +11,53 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :be1950name %>
-    <%= form.text_field :be1950name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :alt_name %>
-    <%= form.text_field :alt_name %>
-  </div>
+  <div class="w3-row">
 
-  <div class="field">
-    <%= form.label :ra %>
-    <%= form.text_field :ra %>
-  </div>
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :be1950name, "Source Name (BE1950)" %>
+      <%= form.text_field :be1950name, class: "w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :decl %>
-    <%= form.text_field :decl %>
-  </div>
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :alt_name %>
+      <%= form.text_field :alt_name, class: "w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
-  </div>
+    <div class="w3-col w3-container" style="width:20%">
+      <%= form.label :redshift %>
+      <%= form.text_field :redshift, class: "w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :atca_link %>
-    <%= form.text_field :atca_link %>
-  </div>
+    <div class="w3-col w3-container" style="width:20%">
+      <%= form.label :source_type %>
+      <%= form.text_field :source_type, class: "w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :source_type %>
-    <%= form.text_field :source_type %>
-  </div>
 
-  <div class="field">
-    <%= form.label :redshift %>
-    <%= form.text_field :redshift %>
-  </div>
+    <div class="w3-col w3-container" style="width:33.3%">
+      <%= form.label :ra %>
+      <%= form.text_field :ra, class: "w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="w3-col w3-container" style="width:33.3%">
+      <%= form.label :decl %>
+      <%= form.text_field :decl, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:33.3%">
+      <%= form.label :atca_link %>
+      <%= form.text_field :atca_link, class: "w3-input w3-border w3-round" %>
+    </div>
+
+
+    <div class="w3-col w3-container" style="width:100%">
+      <%= form.label :comment %>
+      <%= form.text_area :comment, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container">
+      <%= form.submit :Submit, class:"w3-btn w3-blue" %>
+    </div>
   </div>
-<% end %>
+  <% end %>

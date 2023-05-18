@@ -3,12 +3,13 @@
   <div class="w3-content">
   <h1>Sources</h1>
 
-  <table>
+<div class="w3-responsive">
+  <table class="w3-table-all">
     <thead>
       <tr>
-        <th>Be1950name</th>
+        <th>Source Name</th>
         <th>Alt name</th>
-        <th>Ra</th>
+        <th>RA</th>
         <th>Decl</th>
         <th>Comment</th>
         <th>Atca link</th>
@@ -21,7 +22,7 @@
     <tbody>
       <% @sources.each do |source| %>
         <tr>
-          <td><%= source.be1950name %></td>
+          <td><%= link_to source.be1950name, source %></td>
           <td><%= source.alt_name %></td>
           <td><%= source.ra %></td>
           <td><%= source.decl %></td>
@@ -29,16 +30,16 @@
           <td><%= source.atca_link %></td>
           <td><%= source.source_type %></td>
           <td><%= source.redshift %></td>
-          <td><%= link_to 'Show', source %></td>
-          <td><%= link_to 'Edit', edit_source_path(source) %></td>
-          <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_source_path(source), class: "w3-btn w3-green" %></td>
+          <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>
 
   <br>
 
-  <%= link_to 'New Source', new_source_path %>
+  <%= link_to 'New Source', new_source_path, class: "w3-btn w3-blue" %>
 </div>
 </div>

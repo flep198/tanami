@@ -3,64 +3,62 @@
 
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
-<p>
-  <strong>Data:</strong>
-  <%= @session.data %>
-</p>
+    <p>
+      <strong>Data:</strong>
+      <%= @session.data %>
+    </p>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @session.comment %>
-</p>
+    <p>
+      <strong>Comment:</strong>
+      <%= @session.comment %>
+    </p>
 
-<p>
-  <strong>Obs code:</strong>
-  <%= @session.obs_code %>
-</p>
+    <p>
+      <strong>Obs code:</strong>
+      <%= @session.obs_code %>
+    </p>
 
-<%= link_to 'Edit', edit_session_path(@session) %> |
-<%= link_to 'Back', sessions_path %>
-
-
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Uvf</th>
-      <th>Rms</th>
-      <th>Lowest contour</th>
-      <th>Peak flux</th>
-      <th>Beam maj</th>
-      <th>Beam min</th>
-      <th>Beam pos</th>
-      <th>Source</th>
-      <th>Band</th>
-      <th>Session</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @session.datasets.each do |dataset| %>
-      <tr>
-        <td><%= image_tag(dataset.image,width:200) %></td>
-        <td><%= link_to 'uvf Download', dataset.uvf %></td>
-        <td><%= dataset.rms %></td>
-        <td><%= dataset.lowest_contour %></td>
-        <td><%= dataset.peak_flux %></td>
-        <td><%= dataset.beam_maj %></td>
-        <td><%= dataset.beam_min %></td>
-        <td><%= dataset.beam_pos %></td>
-        <td><%= dataset.source.be1950name %></td>
-        <td><%= dataset.band.name %></td>
-        <td><%= dataset.session.data %></td>
-        <td><%= link_to 'Show', dataset %></td>
-        <td><%= link_to 'Edit', edit_dataset_path(dataset) %></td>
-        <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    <%= link_to 'Edit', edit_session_path(@session) %> |
+    <%= link_to 'Back', sessions_path %>
+  </div>
 </div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-responsive">
+      <table class="w3-table-all">
+          <tr>
+            <th>Image</th>
+            <th>Source</th>
+            <th>Session</th>
+            <th>Band</th>
+            <th>RMS [mJy/beam]</th>
+            <th>Lowest Contour [mJy/beam]</th>
+            <th>Peak Flux Density [Jy/beam]</th>
+            <th>Beam [mas x max], [deg]</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @session.datasets.each do |dataset| %>
+            <tr>
+              <td><%= image_tag(dataset.image,width: "100%") %></td>
+              <td><%= link_to dataset.source.be1950name, dataset.source %></td>
+              <td><%= link_to dataset.session.data, dataset.session %></td>
+              <td><%= dataset.band.name %></td>
+              <td><%= dataset.rms %></td>
+              <td><%= dataset.lowest_contour %></td>
+              <td><%= dataset.peak_flux %></td>
+              <td><%= dataset.beam_maj %>  x <%= dataset.beam_min %>, <%= dataset.beam_pos%></td>
+              <td><%= link_to 'uvf Download', dataset.uvf %></td>
+              <td><%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %></td>
+              <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
