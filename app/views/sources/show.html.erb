@@ -3,52 +3,68 @@
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div clas="w3-col">
-    <h1><%= @source.be1950name %></h1>
-<p>
-  <strong>Alt name:</strong>
-  <%= @source.alt_name %>
-</p>
+      <h1><%= @source.be1950name %></h1>
+    </div>
+    <div class="w3-col w3-container" style="width:40%">
 
-<p>
-  <strong>Ra:</strong>
-  <%= @source.ra %>
-</p>
+      <div class="w3-card-4">
+        <%= image_tag(Dataset.all.where(:session_id => @source.sessions.order(:data).first.id, :source_id => @source.id).first.image ,width: "100%",alt: "No Image Available")%>
+        <div class="w3-container w3-center">
+          <p>Latest source image from <%=@source.sessions.order(:data).first.data%></p>
+        </div>
+      </div> 
 
-<p>
-  <strong>Decl:</strong>
-  <%= @source.decl %>
-</p>
+    </div>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @source.comment %>
-</p>
+    <div class="w3-col w3-container" style="width:60%"
 
-<p>
-  <strong>Atca link:</strong>
-  <%= @source.atca_link %>
-</p>
+      <p>
+        <strong>Alt name:</strong>
+        <%= @source.alt_name %>
+      </p>
 
-<p>
-  <strong>Source Type:</strong>
-  <%= @source.source_type %>
-</p>
+      <p>
+        <strong>Ra:</strong>
+        <%= @source.ra %>
+      </p>
 
-<p>
-  <strong>Redshift:</strong>
-  <%= @source.redshift %>
-</p>
+      <p>
+        <strong>Decl:</strong>
+        <%= @source.decl %>
+      </p>
 
-<%= link_to 'Edit', edit_source_path(@source) %> |
-<%= link_to 'Back', sources_path %>
-</div>
+      <p>
+        <strong>Comment:</strong>
+        <%= @source.comment %>
+      </p>
 
-</div>
+      <p>
+        <strong>Atca link:</strong>
+        <%= @source.atca_link %>
+      </p>
+
+      <p>
+        <strong>Source Type:</strong>
+        <%= @source.source_type %>
+      </p>
+
+      <p>
+        <strong>Redshift:</strong>
+        <%= @source.redshift %>
+      </p>
+
+      <%= link_to 'Edit', edit_source_path(@source) %> |
+      <%= link_to 'Back', sources_path %>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <!-- Second Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
   <div class="w3-content">
+    <h1> Observations </h1>
     <div class="w3-responsive">
       <table class="w3-table-all">
           <tr>
@@ -65,7 +81,7 @@
         </thead>
 
         <tbody>
-          <% @source.datasets.each do |dataset| %>
+          <% @source.datasets.order(:data).each do |dataset| %>
             <tr>
               <td><%= image_tag(dataset.image,width: "100%") %></td>
               <td><%= link_to dataset.source.be1950name, dataset.source %></td>

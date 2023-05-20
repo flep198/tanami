@@ -11,22 +11,34 @@
     </div>
   <% end %>
 
-  <div class="field">
+<div class="w3-row">
+  <div class="w3-col w3-container" style="width:30%">
     <%= form.label :data %>
-    <%= form.date_select :data, :start_year => 2007 %>
+    <%= form.date_select :data, :start_year => 2007, class: "w3-select w3-border w3-round" %>
   </div>
 
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
-  </div>
-
-  <div class="field">
+  <div class="w3-col w3-container" style="width:30%">
     <%= form.label :obs_code %>
-    <%= form.text_field :obs_code %>
+    <%= form.text_field :obs_code, class: "w3-input w3-border w3-round" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="w3-col w3-container" style="width:40%">
   </div>
+
+ 
+  <div class="w3-col w3-container" style="width:100%">
+    <%= form.label :comment %>
+    <%= form.text_area :comment, class: "w3-input w3-border w3-round" %>
+  </div>
+</div>
+
+<p></p>
+
+<div class="w3-row">
+  <div class="w3-col w3-container" style="width:50%">
+    <%= form.submit :Submit, class: "w3-btn w3-blue"%>
+  </div>
+</div>
+ 
+</div>
 <% end %>

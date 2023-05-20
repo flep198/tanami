@@ -11,17 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="w3-row">
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :freq, "Frequency [GHz]" %>
+      <%= form.text_field :freq, class: "w3-input w3-border w3-round" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :freq %>
-    <%= form.text_field :freq %>
-  </div>
+<p></p>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="w3-row">
+    <div class="w3-col w3-container">
+      <%= form.submit :Submit, class:"w3-btn w3-blue" %>  
+    </div>
   </div>
 <% end %>

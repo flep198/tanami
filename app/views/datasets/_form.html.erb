@@ -11,62 +11,73 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
+  <div class="w3-row">
 
-  <div class="field">
-    <%= form.label :uvf %>
-    <%= form.file_field :uvf %>
-  </div>
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :image, "Image (.png, .jpg, .gif)" %>
+      <%= form.file_field :image, class:"w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :rms %>
-    <%= form.text_field :rms %>
-  </div>
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :uvf, "uvf File" %>
+      <%= form.file_field :uvf, class:"w3-input w3-border w3-round" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :lowest_contour %>
-    <%= form.text_field :lowest_contour %>
+    <div class="w3-col w3-container" style="width:40%">
+    </div>
   </div>
+  <div class="w3-row">
 
-  <div class="field">
-    <%= form.label :peak_flux %>
-    <%= form.text_field :peak_flux %>
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :source_id, class: "form-label" %>
+      <%= collection_select(:dataset,:source_id,Source.order('be1950name ASC'), :id, :be1950name, {},{ :multiple => false, class: "w3-select w3-border w3-round"}) %>
+    </div>
+
+     <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :band_id, class: "form-label" %>
+      <%= collection_select(:dataset,:band_id,Band.order('name ASC'), :id, :name, {},{ :multiple => false, class: "w3-select w3-border w3-round"}) %>
+    </div>
+
+     <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :session_id, class: "form-label" %>
+      <%= collection_select(:dataset,:session_id,Session.order('data ASC'), :id, :data, {},{ :multiple => false, class: "w3-select w3-border w3-round"}) %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:15%">
+      <%= form.label :rms %>
+      <%= form.text_field :rms, class:"w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:15%">
+      <%= form.label :lowest_contour %>
+      <%= form.text_field :lowest_contour, class:"w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:15%">
+      <%= form.label :peak_flux %>
+      <%= form.text_field :peak_flux, class:"w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:15%">
+      <%= form.label :beam_maj %>
+      <%= form.text_field :beam_maj, class:"w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:15%">
+      <%= form.label :beam_min %>
+      <%= form.text_field :beam_min, class:"w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:15%">
+      <%= form.label :beam_pos %>
+      <%= form.text_field :beam_pos, class:"w3-input w3-border w3-round" %>
+    </div>
+
   </div>
-
-  <div class="field">
-    <%= form.label :beam_maj %>
-    <%= form.text_field :beam_maj %>
-  </div>
-
-  <div class="field">
-    <%= form.label :beam_min %>
-    <%= form.text_field :beam_min %>
-  </div>
-
-  <div class="field">
-    <%= form.label :beam_pos %>
-    <%= form.text_field :beam_pos %>
-  </div>
-
-  <div class="field">
-    <%= form.label :source_id, class: "form-label" %>
-    <%= collection_select(:dataset,:source_id,Source.order('be1950name ASC'), :id, :be1950name, {},{ :multiple => false, class: "form-select"}) %>
-  </div>
-
-   <div class="field">
-    <%= form.label :band_id, class: "form-label" %>
-    <%= collection_select(:dataset,:band_id,Band.order('name ASC'), :id, :name, {},{ :multiple => false, class: "form-select"}) %>
-  </div>
-
-   <div class="field">
-    <%= form.label :session_id, class: "form-label" %>
-    <%= collection_select(:dataset,:session_id,Session.order('data ASC'), :id, :data, {},{ :multiple => false, class: "form-select"}) %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <p></p>
+  <div class="w3-row">
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.submit :Submit, class:"w3-btn w3-blue" %>
+    </div>
   </div>
 <% end %>

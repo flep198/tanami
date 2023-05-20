@@ -11,37 +11,52 @@
     </div>
   <% end %>
 
-  <div class="field">
+<div class="w3-row">
+
+  <div class="w3-col w3-container" style="width:60%">
+
+    <div class="w3-col w3-container" style="width:50%">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-col w3-container" style="width:50%">
+      <%= form.label :reference %>
+      <%= form.text_field :reference, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-third w3-container">
+      <%= form.label :ads_link, "ADS Link" %>
+      <%= form.text_field :ads_link, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-third w3-container">
+      <%= form.label :arxiv_link, "ArXiv Link" %>
+      <%= form.text_field :arxiv_link, class: "w3-input w3-border w3-round" %>
+    </div>
+
+    <div class="w3-third w3-container">
+      <%= form.label :pdf_link, "PDF Link" %>
+      <%= form.text_field :pdf_link, class: "w3-input w3-border w3-round" %>
+    </div>
+
+  </div>
+
+  <div class="w3-col w3-container" style="width:40%">
+    <div class="w3-col w3-container" style="width:100%">
     <%= form.label :authors %>
-    <%= form.text_area :authors %>
+    <%= form.text_area :authors, class: "w3-input w3-border w3-round" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+</div>
 
-  <div class="field">
-    <%= form.label :reference %>
-    <%= form.text_field :reference %>
-  </div>
+<p></p>
 
-  <div class="field">
-    <%= form.label :ads_link %>
-    <%= form.text_field :ads_link %>
+<div class="w3-row">
+  <div class="w3-col w3-container" style="width:30%">
+    <%= form.submit :Submit, class: "w3-btn w3-blue"%>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :arxiv_link %>
-    <%= form.text_field :arxiv_link %>
-  </div>
-
-  <div class="field">
-    <%= form.label :pdf_link %>
-    <%= form.text_field :pdf_link %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
