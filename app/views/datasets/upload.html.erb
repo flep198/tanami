@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <h1>Upload Data</h1>
+
+<%= form_tag import_datasets_path, multipart: true do %>
+
+    <div class="mb-3">
+   	 <%= file_field_tag :data_files, :multiple => true, name: 'data_files[]', class: "w3-select w3-border w3-round" %>
+    </div>
+
+ </br>
+
+	<%= submit_tag "Upload Data", class: "w3-btn w3-blue" %>
+
+<% end %>
+
+</br>
+
+<%= link_to 'Back', datasets_path, class: "w3-btn w3-red" %>

@@ -6,5 +6,6 @@ class Dataset < ApplicationRecord
 
 	has_one_attached :image
 	has_one_attached :uvf
+	has_one_attached :fits
 
 end

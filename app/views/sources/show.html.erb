@@ -8,7 +8,11 @@
     <div class="w3-col w3-container" style="width:40%">
 
       <div class="w3-card-4">
-        <%= image_tag(Dataset.all.where(:session_id => @source.sessions.order(:data).first.id, :source_id => @source.id).first.image ,width: "100%",alt: "No Image Available")%>
+        <% if Dataset.all.where(:session_id => @source.sessions.order(:data).first.id, :source_id => @source.id).first.image.attached? %>  
+          <%= image_tag(Dataset.all.where(:session_id => @source.sessions.order(:data).first.id, :source_id => @source.id).first.image ,width: "100%",alt: "No Image Available")%>
+        <% else %>
+        <img alt="No Image Available">
+        <% end %>
         <div class="w3-container w3-center">
           <p>Latest source image from <%=@source.sessions.order(:data).first.data%></p>
         </div>
@@ -16,7 +20,7 @@
 
     </div>
 
-    <div class="w3-col w3-container" style="width:60%"
+    <div class="w3-col w3-container" style="width:60%">
 
       <p>
         <strong>Alt name:</strong>
@@ -76,14 +80,18 @@
             <th>Lowest Contour [mJy/beam]</th>
             <th>Peak Flux Density [Jy/beam]</th>
             <th>Beam [mas x max], [deg]</th>
-            <th colspan="3"></th>
+            <th colspan="4"></th>
           </tr>
         </thead>
 
         <tbody>
           <% @source.datasets.order(:data).each do |dataset| %>
             <tr>
+              <% if dataset.image.attached? %>
               <td><%= image_tag(dataset.image,width: "100%") %></td>
+              <% else %>
+              <td>Image missing</td>
+              <% end %>
               <td><%= link_to dataset.source.be1950name, dataset.source %></td>
               <td><%= link_to dataset.session.data, dataset.session %></td>
               <td><%= dataset.band.name %></td>
@@ -91,7 +99,16 @@
               <td><%= dataset.lowest_contour %></td>
               <td><%= dataset.peak_flux %></td>
               <td><%= dataset.beam_maj %>  x <%= dataset.beam_min %>, <%= dataset.beam_pos%></td>
-              <td><%= link_to 'uvf Download', dataset.uvf %></td>
+              <% if dataset.uvf.attached? %>
+              <td><%= link_to 'uvf', dataset.uvf %></td>
+              <% else %>
+              <td> no uvf </td>
+              <% end %>
+              <% if dataset.fits.attached? %>
+              <td><%= link_to 'fits', dataset.fits %></td>
+              <% else %>
+              <td>no fits</td>
+              <% end %>
               <td><%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %></td>
               <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
             </tr>
