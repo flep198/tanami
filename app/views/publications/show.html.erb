@@ -32,7 +32,9 @@
     <%= @publication.pdf_link %>
   </p>
 
+<% if current_user.delete_permission %>
   <%= link_to 'Edit', edit_publication_path(@publication) %> |
+<% end %>
   <%= link_to 'Back', publications_path %>
 </div>
 </div>

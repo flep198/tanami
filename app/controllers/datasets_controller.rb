@@ -1,5 +1,6 @@
 class DatasetsController < ApplicationController
   before_action :set_dataset, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /datasets or /datasets.json
   def index

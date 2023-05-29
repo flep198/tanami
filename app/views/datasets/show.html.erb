@@ -46,7 +46,9 @@ No Image available
   <%= @dataset.beam_pos %>
 </p>
 
-<%= link_to 'Edit', edit_dataset_path(@dataset) %> |
+<% if current_user.delete_permission? %>
+  <%= link_to 'Edit', edit_dataset_path(@dataset) %> |
+<% end %>
 <%= link_to 'Back', datasets_path %>
 </div>
 </div>

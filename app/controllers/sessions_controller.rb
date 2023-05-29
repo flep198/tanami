@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /sessions or /sessions.json
   def index

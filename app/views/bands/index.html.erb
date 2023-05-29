@@ -10,7 +10,9 @@
         <tr>
           <th>Band Name</th>
           <th>Frequency [GHz]</th>
-          <th colspan="2"></th>
+          <% if current_user.delete_permission %>
+            <th colspan="2"></th>
+          <% end %>
         </tr>
       </thead>
 
@@ -19,8 +21,10 @@
           <tr>
             <td><%= link_to band.name, band %></td>
             <td><%= band.freq %></td>        
-            <td><%= link_to 'Edit', edit_band_path(band), class: "w3-btn w3-green" %></td>
-            <td><%= link_to 'Destroy', band, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+            <% if current_user.delete_permission? %>
+              <td><%= link_to 'Edit', edit_band_path(band), class: "w3-btn w3-green" %></td>
+              <td><%= link_to 'Destroy', band, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
@@ -29,8 +33,9 @@
 
 <br>
 
-<%= link_to 'New Band', new_band_path, class:"w3-btn w3-blue" %>
-
+<% if current_user.delete_permission? %>
+  <%= link_to 'New Band', new_band_path, class:"w3-btn w3-blue" %>
+<% end %>
 
 </div>
 </div>

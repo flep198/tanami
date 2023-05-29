@@ -1,0 +1,48 @@
+<div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+
+
+    <h2>Log in</h2>
+
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      
+
+    <div class="w3-row">
+
+      <div class="w3-col w3-container">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w3-input w3-border w3-round" %>
+      </div>
+    </div>
+
+    <div class="w3-row">
+
+      <div class="w3-col w3-container">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "w3-input w3-border w3-round" %>
+      </div>
+
+    </div>
+
+      <% if devise_mapping.rememberable? %>
+
+      <div class="w3-row">
+        <div class="w3-col w3-container">
+          <%= f.check_box :remember_me, class: "w3-check w3-border w3-round" %>  Remember me
+        </div>
+      </div>
+
+      <% end %>
+
+      </br>
+
+      <div class="w3-row">
+        <div class="w3-col w3-container">
+          <%= f.submit 'Log in', class:"w3-btn w3-blue" %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

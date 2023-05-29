@@ -30,11 +30,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="w3-bar w3-black w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <%= link_to 'Home' , root_path, class: "w3-bar-item w3-button w3-padding-large w3-white" %>
-    <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
-    <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
-    <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
-    <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+    <% if user_signed_in? %>
+      <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+      <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+      <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+      <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+    <% end %>
     <%= link_to 'Publications', publications_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+    <% if user_signed_in? %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+    <% else %>
+      <%= link_to 'Log in', new_user_session_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+    <% end %>
+
   </div>
 
   <!-- Navbar on small screens -->
@@ -47,7 +55,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 
-
+<div class="w3-panel w3-red">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+</div>
 
     <%= yield %>
 

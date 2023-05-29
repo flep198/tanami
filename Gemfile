@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.7'
 #Script to execute python scripts (required for upload function)
 gem 'pycall'
 
+gem 'devise'
+gem 'activeadmin'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
