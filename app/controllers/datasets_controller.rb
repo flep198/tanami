@@ -92,6 +92,14 @@ class DatasetsController < ApplicationController
         elsif filetype=="fits"
           @dataset=Dataset.create(:beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id)
           @dataset.fits.attach(io: File.open(file.path), filename: source_name+"_"+epoch_id+".fits")
+
+          #create image from fits file
+          wasGood = system( "python3 plot_uvf.py " +file.path+ " source_images/" + source_name +"_"+epoch_id+".jpg" )
+
+          if wasGood
+            @dataset.image.attach(io: File.open("source_images/"+source_name+"_"+epoch_id+".jpg"), filename: source_name+"_"+epoch_id+".jpg")
+          end
+
         end
       else #overwrite entry
         entry_id = Dataset.where(:source_id => source_id, :session_id => session.id, :band_id => band.id).first.id
@@ -101,9 +109,23 @@ class DatasetsController < ApplicationController
         elsif filetype=="fits"
           Dataset.update(entry_id, :beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id)
           Dataset.find(entry_id).fits.attach(io: File.open(file.path), filename: source_name+"_"+epoch_id+".fits")
+
+          #create image from fits file
+          wasGood = system( "python3 plot_uvf.py " +file.path+ " source_images/" + source_name +"_"+epoch_id+".jpg" )
+
+          if wasGood
+            Dataset.find(entry_id).image.attach(io: File.open("source_images/"+source_name+"_"+epoch_id+".jpg"), filename: source_name+"_"+epoch_id+".jpg")
+          end
         end
       end
+
+      #create image plot if fits file
+
+      if filetype=="fits"
+        
+      end
     end
+
 
     redirect_to datasets_path, notice: ("Data Uploaded Successfully")
   end
