@@ -1,0 +1,20 @@
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/pycall-1.4.2/ext/pycall
+/usr/local/rvm/rubies/ruby-2.7.2/bin/ruby -I /usr/local/rvm/rubies/ruby-2.7.2/lib/ruby/2.7.0 -r ./siteconf20230530-23934-1t3vfnm.rb extconf.rb
+creating Makefile
+
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/pycall-1.4.2/ext/pycall
+make "DESTDIR=" clean
+
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/pycall-1.4.2/ext/pycall
+make "DESTDIR="
+compiling gc.c
+compiling libpython.c
+compiling pycall.c
+compiling range.c
+compiling ruby_wrapper.c
+compiling thread.c
+linking shared-object pycall.so
+
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/pycall-1.4.2/ext/pycall
+make "DESTDIR=" install
+/usr/bin/install -m 0755 pycall.so ./.gem.20230530-23934-i2l2np
