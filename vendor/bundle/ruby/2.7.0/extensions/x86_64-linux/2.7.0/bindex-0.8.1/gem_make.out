@@ -1,0 +1,15 @@
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+/usr/local/rvm/rubies/ruby-2.7.2/bin/ruby -I /usr/local/rvm/rubies/ruby-2.7.2/lib/ruby/2.7.0 -r ./siteconf20230530-23934-cfeu3o.rb extconf.rb
+creating Makefile
+
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /scratch/data/tanami/vendor/bundle/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -m 0755 cruby.so ./.gem.20230530-23934-tq5jz5/skiptrace/internal
