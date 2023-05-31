@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :bands
   resources :publications
 
+  get "/upload" => "datasets#upload", as: :upload
+
   devise_scope :user do
     match '/sessions/user', to: 'devise/sessions#create', via: :post
   end
