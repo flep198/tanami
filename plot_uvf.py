@@ -38,6 +38,7 @@ fit_noise = True #if True, the noise value and rms deviation will be fitted as d
 unit = 'mas' #possible units: 'mas', 'arcsec', 'arcmin' and 'deg'. Default (any other string) value is 'deg'. 
 
 #Map limits
+uselim=False #if set to true, limits given below will be used, if false full image will be displayed
 ra_min = -50
 ra_max = 50
 dec_min = -50
@@ -206,6 +207,12 @@ for i in range(len(files)):
     #Plot look tuning
     axe_ratio = 'scaled'
     plt.axis(axe_ratio)
+    
+    if not uselim:
+        ra_min=np.min(X)
+        ra_max=np.max(X)
+        dec_min=np.min(Y)
+        dec_max=np.max(Y)
     plt.xlim(ra_min,ra_max)
     plt.ylim(dec_min,dec_max)
     plt.gca().invert_xaxis()
