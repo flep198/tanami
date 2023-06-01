@@ -7,6 +7,8 @@ permit_params :email, :password, :password_confirmation, :upload_permission, :de
     id_column
     column :email
     column :current_sign_in_at
+    column :upload_permission
+    column :delete_permission
     column :sign_in_count
     column :created_at
     actions
@@ -22,6 +24,10 @@ permit_params :email, :password, :password_confirmation, :upload_permission, :de
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.check_box :upload_permission
+      f.label "Upload Permission"
+      f.check_box :delete_permission
+      f.label "Delete Permission"
     end
     f.actions
   end
