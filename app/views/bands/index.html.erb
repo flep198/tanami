@@ -10,8 +10,10 @@
         <tr>
           <th>Band Name</th>
           <th>Frequency [GHz]</th>
-          <% if current_user.delete_permission %>
-            <th colspan="2"></th>
+          <% if user_signed_in? %>
+            <% if current_user.delete_permission %>
+              <th colspan="2"></th>
+            <% end %>
           <% end %>
         </tr>
       </thead>
@@ -33,8 +35,10 @@
 
 <br>
 
-<% if current_user.delete_permission? %>
-  <%= link_to 'New Band', new_band_path, class:"w3-btn w3-blue" %>
+<% if user_signed_in? %>
+  <% if current_user.delete_permission? %>
+    <%= link_to 'New Band', new_band_path, class:"w3-btn w3-blue" %>
+  <% end %>
 <% end %>
 
 </div>

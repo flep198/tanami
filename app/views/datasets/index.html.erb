@@ -15,8 +15,12 @@
             <th>Lowest Contour [mJy/beam]</th>
             <th>Peak Flux Density [Jy/beam]</th>
             <th>Beam [mas x max], [deg]</th>
-            <% if current_user.delete_permission? %>
+            <% if user_signed_in? %>
+              <% if current_user.delete_permission? %>
               <th colspan="4"></th>
+              <% else %>
+              <th colspan="2"></th>
+              <% end %>
             <% else %>
               <th colspan="2"></th>
             <% end %>
@@ -48,9 +52,11 @@
               <% else %>
               <td>no fits</td>
               <% end %>
-              <% if current_user.delete_permission? %>
-                <td><%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %></td>
-                <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+              <% if user_signed_in? %>
+                <% if current_user.delete_permission? %>
+                  <td><%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %></td>
+                  <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+                <% end %>
               <% end %>
             </tr>
           <% end %>

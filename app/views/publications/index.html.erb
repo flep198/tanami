@@ -13,8 +13,10 @@
         <th>Ads link</th>
         <th>Arxiv link</th>
         <th>Pdf link</th>
-        <% if current_user.delete_permission %>
-        <th colspan="2"></th>
+        <% if user_signed_in? %>
+          <% if current_user.delete_permission %>
+          <th colspan="2"></th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -28,9 +30,11 @@
           <td><%= publication.ads_link %></td>
           <td><%= publication.arxiv_link %></td>
           <td><%= publication.pdf_link %></td>
-          <% if current_user.delete_permission %>
-            <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
-            <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if user_signed_in? %>
+            <% if current_user.delete_permission %>
+              <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
+              <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>

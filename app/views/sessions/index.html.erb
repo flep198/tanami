@@ -11,8 +11,10 @@
         <th>Date</th>
         <th>Comment</th>
         <th>Obs code</th>
-        <% if current_user.delete_permission %>
-           <th colspan="2"></th>
+        <% if user_signed_in? %>
+          <% if current_user.delete_permission %>
+             <th colspan="2"></th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -23,10 +25,12 @@
           <td><%= link_to session.data, session %></td>
           <td><%= session.comment %></td>
           <td><%= session.obs_code %></td>
-          <% if current_user.delete_permission %>
-            <td><%= link_to 'Edit', edit_session_path(session), class: "w3-btn w3-green" %></td>
-            <td><%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
-          <% end %> 
+          <% if user_signed_in? %>
+            <% if current_user.delete_permission %>
+              <td><%= link_to 'Edit', edit_session_path(session), class: "w3-btn w3-green" %></td>
+              <td><%= link_to 'Destroy', session, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+            <% end %> 
+          <% end %>
         </tr>
       <% end %>
     </tbody>

@@ -15,8 +15,10 @@
         <th>ATCA Link</th>
         <th>Source Type</th>
         <th>Redshift</th>
-        <% if current_user.delete_permission %>
-          <th colspan="2"></th>
+        <% if user_signed_in? %>
+          <% if current_user.delete_permission %>
+            <th colspan="2"></th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -32,9 +34,11 @@
           <td><%= source.atca_link %></td>
           <td><%= source.source_type %></td>
           <td><%= source.redshift %></td>
-          <% if current_user.delete_permission %>
-            <td><%= link_to 'Edit', edit_source_path(source), class: "w3-btn w3-green" %></td>
-            <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+          <% if user_signed_in? %>
+            <% if current_user.delete_permission %>
+              <td><%= link_to 'Edit', edit_source_path(source), class: "w3-btn w3-green" %></td>
+              <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+            <% end %>
           <% end %>
         </tr>
       <% end %>

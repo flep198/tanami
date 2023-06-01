@@ -12,9 +12,11 @@
     <%= @band.freq %>
   </p>
 
+<% if user_signed_in? %>
   <% if current_user.delete_permission? %>
     <%= link_to 'Edit', edit_band_path(@band) %> |
   <% end %>
+<% end %>
   <%= link_to 'Back', bands_path %>
 </div>
 </div>
