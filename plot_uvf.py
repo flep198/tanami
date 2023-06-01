@@ -1,3 +1,18 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.patches import Ellipse
+from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.colors as colors
+from astropy.io import fits
+from astropy.modeling import models, fitting
+import os
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+import glob
+import sys
+
+
+
 #Script to plot VLBI-clean-images and to save image-parameters to a table (csv and latex table)
 
 #The interferometric FITS-files of one source taken at different observation dates should be stored in one common folder and named with their individual observation date (e.g. 0537-286_2020-08-30_remap.fits).
@@ -57,19 +72,6 @@ latex_table = False #if True, image parameter will be written to a latex table
 ############PROGRAM-CORE###############
 #######################################
 
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse
-from matplotlib.backends.backend_pdf import PdfPages
-import matplotlib.colors as colors
-from astropy.io import fits
-from astropy.modeling import models, fitting
-import os
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-import glob
-import sys
 
 plt.rcParams['savefig.dpi'] = 600
 
