@@ -28,7 +28,6 @@ class DatasetsController < ApplicationController
     fits=PyCall.import_module("astropy.io.fits")
 
     @data_files = params[:data_files]
-
     @data_files.each do |file|
 
       #open fits file and read header
@@ -36,7 +35,11 @@ class DatasetsController < ApplicationController
       
       #import general file info
       source_name=header["OBJECT"]
-      epoch_id=header["OBSERVER"]
+      begin
+        epoch_id=header["OBSERVER"]
+      rescue
+        epoch_id=""
+      end
       obs_date=header["DATE-OBS"]
 
       #read out CVARs for RA, DECL and FREQ
@@ -67,6 +70,7 @@ class DatasetsController < ApplicationController
         peak_flux=header["DATAMAX"]
         filetype="fits"
       rescue
+        #we should check for other possible file types here.
         filetype="uvf"
       end
 
@@ -76,56 +80,60 @@ class DatasetsController < ApplicationController
         source_id=Source.where(be1950name: source_name).first.id
         Source.update(source_id, :ra => ra, :decl => decl)
       end
-      session=Session.where(obs_code: epoch_id).first_or_create(data: obs_date)
+      session=Session.where(data: obs_date).first_or_create(obs_code: epoch_id)
       if not Band.exists?(freq: frequency-1.0..frequency+1.0)
         band=Band.create(:freq => frequency)
       else
         band=Band.where(freq: frequency-1.0..frequency+1.0).first
       end
       
+      if not Observation.exists?(:source_id => source_id, :session_id => session.id, :band_id => band.id)
+        @observation=Observation.create(:source_id => source_id, :session_id => session.id, :band_id => band.id)
+        observation_id=@observation.id
+      else
+        observation_id=Observation.where(:source_id => source_id, :session_id => session.id, :band_id => band.id).first.id
+      end
 
-      #creates new database entry only if the scan is not already in the database (to prevent double entries), otherwise old entry is overwritten
-      if not Dataset.exists?(:source_id => source_id, :session_id => session.id, :band_id => band.id)
-        if filetype=="uvf"
-          @dataset=Dataset.create(:source_id => source_id, :session_id => session.id, :band_id => band.id)
-          @dataset.uvf.attach(io: File.open(file.path), filename: source_name+"_"+epoch_id+".uvf")
-        elsif filetype=="fits"
-          @dataset=Dataset.create(:beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id)
-          @dataset.fits.attach(io: File.open(file.path), filename: source_name+"_"+epoch_id+".fits")
 
-          #create image from fits file
-          wasGood = system( "python3 plot_uvf.py " +file.path+ " source_images/" + source_name +"_"+epoch_id+".jpg" )
 
-          if wasGood
-            @dataset.image.attach(io: File.open("source_images/"+source_name+"_"+epoch_id+".jpg"), filename: source_name+"_"+epoch_id+".jpg")
-          end
+      if filetype=="uvf"
+        @dataset=Dataset.create(:source_id => source_id, :session_id => session.id, :band_id => band.id, :observation_id => observation_id)
+        @dataset.uvf.attach(io: File.open(file.path), filename: source_name+"_"+obs_date+".uvf")
+      elsif filetype=="fits"
+        @dataset=Dataset.create(:beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id, :observation_id => observation_id)
+        @dataset.fits.attach(io: File.open(file.path), filename: source_name+"_"+obs_date+".fits")
 
+        #create image from fits file
+        wasGood = system( "python3 plot_uvf.py " +file.path+ " source_images/" + source_name +"_"+obs_date+".jpg" )
+
+        if wasGood
+          @dataset.image.attach(io: File.open("source_images/"+source_name+"_"+obs_date+".jpg"), filename: source_name+"_"+obs_date+".jpg")
         end
+
+      end
+
+=begin
       else #overwrite entry
         entry_id = Dataset.where(:source_id => source_id, :session_id => session.id, :band_id => band.id).first.id
         if filetype=="uvf" 
           Dataset.update(entry_id,:source_id => source_id, :session_id => session.id, :band_id => band.id)
-          Dataset.find(entry_id).uvf.attach(io: File.open(file.path), filename: source_name+"_"+epoch_id+".uvf")
+          Dataset.find(entry_id).uvf.attach(io: File.open(file.path), filename: source_name+"_"+obs_date+".uvf")
         elsif filetype=="fits"
           Dataset.update(entry_id, :beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id)
-          Dataset.find(entry_id).fits.attach(io: File.open(file.path), filename: source_name+"_"+epoch_id+".fits")
+          Dataset.find(entry_id).fits.attach(io: File.open(file.path), filename: source_name+"_"+obs_date+".fits")
 
           #create image from fits file
-          wasGood = system( "python3 plot_uvf.py " +file.path+ " source_images/" + source_name +"_"+epoch_id+".jpg" )
+          wasGood = system( "python3 plot_uvf.py " +file.path+ " source_images/" + source_name +"_"+obs_date+".jpg" )
 
           if wasGood
-            Dataset.find(entry_id).image.attach(io: File.open("source_images/"+source_name+"_"+epoch_id+".jpg"), filename: source_name+"_"+epoch_id+".jpg")
+            Dataset.find(entry_id).image.attach(io: File.open("source_images/"+source_name+"_"+obs_date+".jpg"), filename: source_name+"_"+obs_date+".jpg")
           end
         end
       end
-
+=end
       #create image plot if fits file
 
-      if filetype=="fits"
-        
-      end
     end
-
 
     redirect_to datasets_path, notice: ("Data Uploaded Successfully")
   end
@@ -176,6 +184,6 @@ class DatasetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dataset_params
-      params.require(:dataset).permit(:image, :uvf, :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :session_id, :source_id, :band_id)
+      params.require(:dataset).permit(:image, :uvf, :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :public, :override, :session_id, :source_id, :band_id, :user_id, :observation_id)
     end
 end

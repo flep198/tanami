@@ -24,7 +24,7 @@
     </thead>
 
     <tbody>
-      <% @sources.each do |source| %>
+      <% @sources.order(:be1950name).each do |source| %>
         <tr>
           <td><%= link_to source.be1950name, source %></td>
           <td><%= source.alt_name %></td>

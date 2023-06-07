@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_29_070533) do
+ActiveRecord::Schema.define(version: 2023_06_07_203433) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -85,9 +85,25 @@ ActiveRecord::Schema.define(version: 2023_05_29_070533) do
     t.integer "source_id"
     t.integer "band_id"
     t.integer "session_id"
+    t.boolean "public", default: false
+    t.integer "observation_id"
+    t.integer "user_id"
     t.index ["band_id"], name: "index_datasets_on_band_id"
+    t.index ["observation_id"], name: "index_datasets_on_observation_id"
     t.index ["session_id"], name: "index_datasets_on_session_id"
     t.index ["source_id"], name: "index_datasets_on_source_id"
+    t.index ["user_id"], name: "index_datasets_on_user_id"
+  end
+
+  create_table "observations", force: :cascade do |t|
+    t.integer "source_id"
+    t.integer "session_id"
+    t.integer "band_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["band_id"], name: "index_observations_on_band_id"
+    t.index ["session_id"], name: "index_observations_on_session_id"
+    t.index ["source_id"], name: "index_observations_on_source_id"
   end
 
   create_table "publications", force: :cascade do |t|

@@ -1,6 +1,8 @@
 class Source < ApplicationRecord
 	has_many :datasets
-	has_many :sessions, :through => :datasets
-	has_many :bands, :through => :datasets
+	has_many :observations
+	has_many :sessions, :through => :observations
+	has_many :bands, :through => :observations
+	
 	
 end

@@ -5,7 +5,7 @@ ActiveAdmin.register Dataset do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :source_id, :band_id, :session_id
+  permit_params :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :public, :source_id, :band_id, :session_id
   #
   # or
   #

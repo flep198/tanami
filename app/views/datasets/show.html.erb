@@ -4,7 +4,7 @@
   <div class="w3-content">
 <p>
   <strong>Image:</strong>
-<% if dataset.image.attached? %>
+<% if @dataset.image.attached? %>
  <%= image_tag(@dataset.image,width: 200) %>
 <% else %>
 No Image available

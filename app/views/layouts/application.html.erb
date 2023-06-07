@@ -9,7 +9,6 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <%= stylesheet_link_tag 'w3' %>
 
@@ -30,16 +29,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <%= link_to 'Home' , root_path, class: "w3-bar-item w3-button w3-padding-large w3-white" %>
     <% if user_signed_in? %>
-      <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
-      <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
-      <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
-      <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+      <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
+      <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
+      <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
+      <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
+      <%= link_to 'Observations', observations_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
     <% end %>
-    <%= link_to 'Publications', publications_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+    <%= link_to 'Publications', publications_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
     <% if user_signed_in? %>
-      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
     <% else %>
-      <%= link_to 'Log in', new_user_session_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" %>
+      <%= link_to 'Log in', new_user_session_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
     <% end %>
 
   </div>
@@ -51,6 +51,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-padding-large" %>
     <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-padding-large" %>
     <%= link_to 'Publications', publications_path, class: "w3-bar-item w3-button w3-padding-large" %>
+    <%= link_to 'Observations', observations_path, class: "w3-bar-item w3-button w3-padding-large" %>
   </div>
 </div>
 

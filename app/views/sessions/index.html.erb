@@ -20,7 +20,7 @@
     </thead>
 
     <tbody>
-      <% @sessions.each do |session| %>
+      <% @sessions.order(:data).reverse.each do |session| %>
         <tr>
           <td><%= link_to session.data, session %></td>
           <td><%= session.comment %></td>

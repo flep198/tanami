@@ -1,0 +1,44 @@
+<% if user_signed_in? %>
+  <% if current_user.upload_permission? %>
+
+    <p id="notice"><%= notice %></p>
+    <div class="w3-row-padding w3-padding-64 w3-container">
+      <div class="w3-content">
+        <h1>Upload Data</h1>
+
+    <%= form_tag import_datasets_path, multipart: true do %>
+
+      <div class="w3-row">
+        <div class="w3-col w3-container" style="width:100%">
+       	 <%= file_field_tag :data_files, :multiple => true, name: 'data_files[]', class: "w3-select w3-border w3-round" %>
+        </div>
+
+        <div class="w3-col w3-container" style="width:70%">
+        <%= check_box_tag :override, class:"w3-check w3-border w3-round" %> Override existing files?
+        </div>
+
+      </div>
+
+     </br>
+
+     <!-- We should add an option here to select whether we want to override old stuff or create a duplicate dataset (could cause problems, still need views for these cases) -->
+
+    	<%= submit_tag "Upload Data", class: "w3-btn w3-blue" %>
+
+    <% end %>
+
+    </br>
+
+    <%= link_to 'Back', datasets_path, class: "w3-btn w3-red" %>
+  <% else %>
+    <%= flash[:notice] = 'You do not have upload permissions. Please contact the system administrator.'%>
+      <script type="text/javascript">
+        window.location.href="/"
+      </script>
+  <% end %>
+<% else %>
+  <%= flash[:notice] = 'You do not have upload permissions. Please contact the system administrator.'%>
+    <script type="text/javascript">
+      window.location.href="/"
+    </script>
+<% end %>

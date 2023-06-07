@@ -1,0 +1,50 @@
+<%= form_with(model: observation) do |form| %>
+  <% if observation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(observation.errors.count, "error") %> prohibited this observation from being saved:</h2>
+
+      <ul>
+        <% observation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="w3-row">
+
+
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.label :calibrated_uvf, "uvf File" %>
+      <%= form.file_field :calibrated_uvf, class:"w3-input w3-border w3-round" %>
+    </div>
+
+
+
+    <div class="w3-col w3-container" style="width:70%">
+    </div>
+  </div>
+  <div class="w3-row">
+
+    <div class="w3-col w3-container" style="width:33%">
+      <%= form.label :source_id, class: "form-label" %>
+      <%= collection_select(:observation,:source_id,Source.order('be1950name ASC'), :id, :be1950name, {},{ :multiple => false, class: "w3-select w3-border w3-round"}) %>
+    </div>
+
+     <div class="w3-col w3-container" style="width:33%">
+      <%= form.label :band_id, class: "form-label" %>
+      <%= collection_select(:observation,:band_id,Band.order('name ASC'), :id, :name, {},{ :multiple => false, class: "w3-select w3-border w3-round"}) %>
+    </div>
+
+     <div class="w3-col w3-container" style="width:33%">
+      <%= form.label :session_id, class: "form-label" %>
+      <%= collection_select(:observation,:session_id,Session.order('data ASC'), :id, :data, {},{ :multiple => false, class: "w3-select w3-border w3-round"}) %>
+    </div>
+  </div>
+  <p></p>
+  <div class="w3-row">
+    <div class="w3-col w3-container" style="width:30%">
+      <%= form.submit :Submit, class:"w3-btn w3-blue" %>
+    </div>
+  </div>
+<% end %>

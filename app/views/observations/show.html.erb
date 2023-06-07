@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+<p></p>
+
+<p>
+  <strong>Uvf:</strong>
+  <% if @observation.calibrated_uvf.attached? %>
+  <%= link_to 'uvf Download', @observation.calibrated_uvf %>
+  <% end %>
+</p>
+  </div>
+</div>
+
+
+<% if user_signed_in? %>
+  <% if current_user.delete_permission? %>
+    <%= link_to 'Edit', edit_observation_path(@observation) %> |
+  <% end %>
+<% end %>
+<%= link_to 'Back', observations_path %>
+</div>
+</div>

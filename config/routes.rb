@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :datasets
   resources :bands
   resources :publications
+  resources :observations
 
   get "/upload" => "datasets#upload", as: :upload
 

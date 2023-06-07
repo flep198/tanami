@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
+
+
     <h1>Datasets</h1>
 
+    <%= link_to 'Upload Data', upload_path, class: "w3-btn w3-orange" %>
+    <p></p>
 
     <div class="w3-responsive">
       <table class="w3-table-all">
@@ -31,7 +35,7 @@
           <% @datasets.each do |dataset| %>
             <tr>
               <% if dataset.image.attached? %>
-              <td><%= image_tag(dataset.image,width: "100%") %></td>
+              <td><%= link_to image_tag(dataset.image,width: "100%"), dataset %></td>
               <% else %>
               <td>Image missing</td>
               <% end %>
@@ -65,8 +69,6 @@
     </div>
 
     <br>
-
-    <%= link_to 'New Dataset', new_dataset_path, class: "w3-btn w3-blue" %>
 
 </div>
 </div>
