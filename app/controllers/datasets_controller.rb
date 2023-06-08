@@ -21,6 +21,7 @@ class DatasetsController < ApplicationController
   end
 
   def upload
+
   end
 
   def import
@@ -28,6 +29,7 @@ class DatasetsController < ApplicationController
     fits=PyCall.import_module("astropy.io.fits")
 
     @data_files = params[:data_files]
+    user_id = params[:user_id]
     @data_files.each do |file|
 
       #open fits file and read header
@@ -97,10 +99,10 @@ class DatasetsController < ApplicationController
 
 
       if filetype=="uvf"
-        @dataset=Dataset.create(:source_id => source_id, :session_id => session.id, :band_id => band.id, :observation_id => observation_id)
+        @dataset=Dataset.create(:source_id => source_id, :session_id => session.id, :band_id => band.id, :observation_id => observation_id, :user_id => user_id)
         @dataset.uvf.attach(io: File.open(file.path), filename: source_name+"_"+obs_date+".uvf")
       elsif filetype=="fits"
-        @dataset=Dataset.create(:beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id, :observation_id => observation_id)
+        @dataset=Dataset.create(:beam_maj => beam_maj, :beam_min => beam_min, :beam_pos => beam_pos, :peak_flux => peak_flux, :rms => rms, :source_id => source_id, :session_id => session.id, :band_id => band.id, :observation_id => observation_id, :user_id => user_id)
         @dataset.fits.attach(io: File.open(file.path), filename: source_name+"_"+obs_date+".fits")
 
         #create image from fits file

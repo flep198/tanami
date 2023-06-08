@@ -17,10 +17,7 @@
         <%= check_box_tag :override, class:"w3-check w3-border w3-round" %> Override existing files?
         </div>
 
-        <div style display="none">
-        <%= text_field :user_id, value: current_user.id.to_s %>
-        </div>
-
+        <%= hidden_field_tag :user_id, current_user.id %> 
       </div>
 
      </br>

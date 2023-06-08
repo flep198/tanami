@@ -1,24 +1,124 @@
+
 <p id="notice"><%= notice %></p>
 
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
-<p></p>
+    <div clas="w3-col">
+      <h1><%= @observation.source.be1950name %> on <%= @observation.session.data%> at <%= @observation.band.name%> </h1>
+    </div>
 
-<p>
-  <strong>Uvf:</strong>
-  <% if @observation.calibrated_uvf.attached? %>
-  <%= link_to 'uvf Download', @observation.calibrated_uvf %>
-  <% end %>
-</p>
+    <% @observation.datasets.each do |dataset| %>
+
+    <div class="w3-col w3-container" style="width:33%">
+
+      <div class="w3-card-4">
+        <% if dataset.image.attached? %> 
+          <%= image_tag(dataset.image ,width: "100%",alt: "No Image Available")%>
+        <% else %>
+        <img alt="No Image Available">
+        <% end %>
+        <div class="w3-container w3-center">
+          <p><strong>Uploader: </strong><%= dataset.user.email%>
+          <p><strong>RMS: </strong><%= dataset.rms%> mJy/beam</p>
+          <p><strong>Peak Flux: </strong><%= dataset.peak_flux%> Jy/beam</p>
+          <p><strong>Beam: </strong><%= dataset.beam_maj %> mas x <%= dataset.beam_min %> mas, <%= dataset.beam_pos%>°</p>
+          <p><% if dataset.uvf.attached? %>
+            <%= link_to 'uvf', dataset.uvf %>
+          <% else %>
+            no uvf
+          <% end %>
+          <% if dataset.fits.attached? %>
+            <%= link_to 'fits', dataset.fits %>
+          <% else %>
+            no fits
+          <% end %>
+          </p>
+          <p>
+          <% if user_signed_in? %>
+            <% if current_user.delete_permission %>
+              <%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %>
+              <%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %>
+            <% end %>
+          <% end %>
+          </p>
+        </div>
+      </div> 
+
+    </div>
+
+    <% end %>
+
+
+
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+    <h1> Datasets </h1>
+    <div class="w3-responsive">
+      <table class="w3-table-all">
+          <tr>
+            <th>Image</th>
+            <th>Source</th>
+            <th>Session</th>
+            <th>Band</th>
+            <th>RMS [mJy/beam]</th>
+            <th>Lowest Contour [mJy/beam]</th>
+            <th>Peak Flux Density [Jy/beam]</th>
+            <th>Beam [mas x max], [deg]</th>
+            <% if user_signed_in? %>
+              <% if current_user.delete_permission %>
+                <th colspan="4"></th>
+              <% else %>
+                <th colspan="2"></th>
+              <% end %>
+            <% else %>
+              <th colspan="2"></th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @observation.datasets.order(:data).each do |dataset| %>
+            <tr>
+              <% if dataset.image.attached? %>
+              <td><%= image_tag(dataset.image,width: "100%") %></td>
+              <% else %>
+              <td>Image missing</td>
+              <% end %>
+              <td><%= link_to dataset.source.be1950name, dataset.source %></td>
+              <td><%= link_to dataset.session.data, dataset.session %></td>
+              <td><%= dataset.band.name %></td>
+              <td><%= dataset.rms %></td>
+              <td><%= dataset.lowest_contour %></td>
+              <td><%= dataset.peak_flux %></td>
+              <td><%= dataset.beam_maj %>  x <%= dataset.beam_min %>, <%= dataset.beam_pos%></td>
+              <% if dataset.uvf.attached? %>
+              <td><%= link_to 'uvf', dataset.uvf %></td>
+              <% else %>
+              <td> no uvf </td>
+              <% end %>
+              <% if dataset.fits.attached? %>
+              <td><%= link_to 'fits', dataset.fits %></td>
+              <% else %>
+              <td>no fits</td>
+              <% end %>
+              <% if user_signed_in? %>
+                <% if current_user.delete_permission %>
+                  <td><%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %></td>
+                  <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
 
-<% if user_signed_in? %>
-  <% if current_user.delete_permission? %>
-    <%= link_to 'Edit', edit_observation_path(@observation) %> |
-  <% end %>
-<% end %>
-<%= link_to 'Back', observations_path %>
 </div>
 </div>

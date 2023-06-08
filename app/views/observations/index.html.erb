@@ -3,7 +3,7 @@
   <div class="w3-content">
 
 
-    <h1>observations</h1>
+    <h1>Observations</h1>
 
     <%= link_to 'Upload Calibrated Data', upload_path, class: "w3-btn w3-orange" %>
     <p></p>
@@ -11,6 +11,7 @@
     <div class="w3-responsive">
       <table class="w3-table-all">
           <tr>
+            <th>Observation</th>
             <th>Source</th>
             <th>Session</th>
             <th>Band</th>
@@ -29,6 +30,7 @@
         <tbody>
           <% @observations.each do |observation| %>
             <tr>
+              <td><%= link_to "Show Datasets", observation_url(observation)%></td>
               <td><%= link_to observation.source.be1950name, observation.source %></td>
               <td><%= link_to observation.session.data, observation.session %></td>
               <td><%= observation.band.name %></td>
