@@ -159,6 +159,25 @@ class DatasetsController < ApplicationController
   def update
     respond_to do |format|
       if @dataset.update(dataset_params)
+
+        if @dataset.image.attached?
+          @dataset.image.purge
+        end
+        
+        if @dataset.fits.attached?
+          #create image from fits file
+          date=@dataset.session.data.strftime("%Y_%m_%d")
+          puts date
+          wasGood = system( "python3 plot_uvf.py " +ActiveStorage::Blob.service.path_for(@dataset.fits.key).to_s + " source_images/" + @dataset.source.be1950name + "_"+ date + ".jpg" + " " + @dataset.ra_min.to_s + " " + @dataset.ra_max.to_s + " " + @dataset.dec_min.to_s + " " + @dataset.dec_max.to_s)
+
+          puts "python3 plot_uvf.py " +ActiveStorage::Blob.service.path_for(@dataset.fits.key).to_s + " source_images/" + @dataset.source.be1950name + "_"+ date + ".jpg" + " " + @dataset.ra_min.to_s + " " + @dataset.ra_max.to_s + " " + @dataset.dec_min.to_s + " " + @dataset.dec_max.to_s
+
+          if wasGood
+            @dataset.image.attach(io: File.open("source_images/"+@dataset.source.be1950name+"_"+date+".jpg"), filename: @dataset.source.be1950name+"_"+date+".jpg")
+          end
+        end
+
+
         format.html { redirect_to datasets_path, notice: "Dataset was successfully updated." }
         format.json { render :show, status: :ok, location: @dataset }
       else
@@ -186,6 +205,6 @@ class DatasetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dataset_params
-      params.require(:dataset).permit(:image, :uvf, :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :public, :override, :session_id, :source_id, :band_id, :user_id, :observation_id)
+      params.require(:dataset).permit(:image, :uvf, :rms, :lowest_contour, :peak_flux, :beam_maj, :beam_min, :beam_pos, :public, :override, :session_id, :source_id, :band_id, :user_id, :observation_id,:ra_min,:ra_max,:dec_min,:dec_max)
     end
 end

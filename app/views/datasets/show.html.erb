@@ -13,8 +13,12 @@ No Image available
 
 <p>
   <strong>uvf:</strong>
-  <%= link_to 'uvf Download', @dataset.uvf %>
-</p>ex
+  <% if @dataset.uvf.attached? %>
+    <%= link_to 'uvf Download', @dataset.uvf %>
+  <% else %>
+    no uvf
+  <% end %>
+</p>
 
 <p>
   <strong>Rms:</strong>

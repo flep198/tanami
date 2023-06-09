@@ -18,6 +18,11 @@
         <img alt="No Image Available">
         <% end %>
         <div class="w3-container w3-center">
+          <% if dataset.public %>
+          <p class="w3-green">PUBLIC</p>
+          <% else %>
+          <p class="w3-red">not public</p>
+          <% end %>
           <p><strong>Uploader: </strong><%= dataset.user.email%>
           <p><strong>RMS: </strong><%= dataset.rms%> mJy/beam</p>
           <p><strong>Peak Flux: </strong><%= dataset.peak_flux%> Jy/beam</p>
@@ -37,7 +42,7 @@
           <% if user_signed_in? %>
             <% if current_user.delete_permission %>
               <%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %>
-              <%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %>
+              <%= link_to 'Delete', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %>
             <% end %>
           <% end %>
           </p>
@@ -82,7 +87,11 @@
 
         <tbody>
           <% @observation.datasets.order(:data).each do |dataset| %>
-            <tr>
+            <% if dataset.public %>
+              <tr class="w3-green">
+            <% else %>
+              <tr>
+            <% end %>
               <% if dataset.image.attached? %>
               <td><%= image_tag(dataset.image,width: "100%") %></td>
               <% else %>
@@ -108,7 +117,7 @@
               <% if user_signed_in? %>
                 <% if current_user.delete_permission %>
                   <td><%= link_to 'Edit', edit_dataset_path(dataset), class: "w3-btn w3-green" %></td>
-                  <td><%= link_to 'Destroy', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
+                  <td><%= link_to 'Delete', dataset, method: :delete, data: { confirm: 'Are you sure?' }, class: "w3-btn w3-red" %></td>
                 <% end %>
               <% end %>
             </tr>

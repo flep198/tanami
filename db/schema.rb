@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_07_203433) do
+ActiveRecord::Schema.define(version: 2023_06_09_140045) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -88,6 +88,10 @@ ActiveRecord::Schema.define(version: 2023_06_07_203433) do
     t.boolean "public", default: false
     t.integer "observation_id"
     t.integer "user_id"
+    t.float "ra_min"
+    t.float "ra_max"
+    t.float "dec_min"
+    t.float "dec_max"
     t.index ["band_id"], name: "index_datasets_on_band_id"
     t.index ["observation_id"], name: "index_datasets_on_observation_id"
     t.index ["session_id"], name: "index_datasets_on_session_id"

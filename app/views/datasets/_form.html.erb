@@ -13,19 +13,34 @@
 
   <div class="w3-row">
 
-    <div class="w3-col w3-container" style="width:30%">
+    <div class="w3-col w3-container" style="width:20%">
       <%= form.label :image, "Image (.png, .jpg, .gif)" %>
       <%= form.file_field :image, class:"w3-input w3-border w3-round" %>
     </div>
 
-    <div class="w3-col w3-container" style="width:30%">
+    <div class="w3-col w3-container" style="width:20%">
       <%= form.label :uvf, "uvf File" %>
       <%= form.file_field :uvf, class:"w3-input w3-border w3-round" %>
     </div>
 
+    <div class="w3-col w3-container" style="width:12.5%">
+      <%= form.label :ra_min, "RA min"%>
+      <%= form.text_field :ra_min, class:"w3-input w3-border w3-round"%>
+    </div>
 
+    <div class="w3-col w3-container" style="width:12.5%">
+      <%= form.label :ra_max, "RA max"%>
+      <%= form.text_field :ra_max, class:"w3-input w3-border w3-round"%>
+    </div>
 
-    <div class="w3-col w3-container" style="width:40%">
+    <div class="w3-col w3-container" style="width:12.5%">
+      <%= form.label :dec_min, "DEC min"%>
+      <%= form.text_field :dec_min, class:"w3-input w3-border w3-round"%>
+    </div>
+
+    <div class="w3-col w3-container" style="width:12.5%">
+      <%= form.label :dec_max, "DEC max"%>
+      <%= form.text_field :dec_max, class:"w3-input w3-border w3-round"%>
     </div>
   </div>
   <div class="w3-row">

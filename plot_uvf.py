@@ -38,11 +38,14 @@ fit_noise = True #if True, the noise value and rms deviation will be fitted as d
 unit = 'mas' #possible units: 'mas', 'arcsec', 'arcmin' and 'deg'. Default (any other string) value is 'deg'. 
 
 #Map limits
-uselim=False #if set to true, limits given below will be used, if false full image will be displayed
-ra_min = -50
-ra_max = 50
-dec_min = -50
-dec_max = 50
+if len(sys.argv)<=3:
+    uselim=False #if set to true, limits given below will be used, if false full image will be displayed
+else:
+    uselim=True
+    ra_min = float(sys.argv[3])
+    ra_max = float(sys.argv[4])
+    dec_min = float(sys.argv[5])
+    dec_max = float(sys.argv[6])
 
 #Contour plot
 contour = True #if True, a contour plot will be done

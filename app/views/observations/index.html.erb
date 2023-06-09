@@ -15,6 +15,7 @@
             <th>Source</th>
             <th>Session</th>
             <th>Band</th>
+            <th>Status</th>
             <% if user_signed_in? %>
               <% if current_user.delete_permission? %>
               <th colspan="3"></th>
@@ -34,6 +35,20 @@
               <td><%= link_to observation.source.be1950name, observation.source %></td>
               <td><%= link_to observation.session.data, observation.session %></td>
               <td><%= observation.band.name %></td>
+              <td> 
+                  <% count=count_public_datasets(observation) %>
+                  <% if count==1 %>
+                    All Good
+                  <% elsif count==1 and observation.datasets.length>1 %>
+                    All good, can remove old images
+                  <% elsif count>1 %>
+                    WARNING, more than 1 public dataset!
+                  <% elsif count==0 and observation.datasets.length>0 %>
+                    Please choose public dataset
+                  <% elsif count==0 and observation.datasets.length==0 %>
+                    NO DATA
+                  <% end %>
+                </td>
               <% if observation.calibrated_uvf.attached? %>
               <td><%= link_to 'uvf', observation.calibrated_uvf %></td>
               <% else %>
