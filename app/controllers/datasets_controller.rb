@@ -146,6 +146,7 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       if @dataset.save
+
         format.html { redirect_to dataset_url(@dataset), notice: "Dataset was successfully created." }
         format.json { render :show, status: :created, location: @dataset }
       else
@@ -167,10 +168,8 @@ class DatasetsController < ApplicationController
         if @dataset.fits.attached?
           #create image from fits file
           date=@dataset.session.data.strftime("%Y_%m_%d")
-          puts date
+      
           wasGood = system( "python3 plot_uvf.py " +ActiveStorage::Blob.service.path_for(@dataset.fits.key).to_s + " source_images/" + @dataset.source.be1950name + "_"+ date + ".jpg" + " " + @dataset.ra_min.to_s + " " + @dataset.ra_max.to_s + " " + @dataset.dec_min.to_s + " " + @dataset.dec_max.to_s)
-
-          puts "python3 plot_uvf.py " +ActiveStorage::Blob.service.path_for(@dataset.fits.key).to_s + " source_images/" + @dataset.source.be1950name + "_"+ date + ".jpg" + " " + @dataset.ra_min.to_s + " " + @dataset.ra_max.to_s + " " + @dataset.dec_min.to_s + " " + @dataset.dec_max.to_s
 
           if wasGood
             @dataset.image.attach(io: File.open("source_images/"+@dataset.source.be1950name+"_"+date+".jpg"), filename: @dataset.source.be1950name+"_"+date+".jpg")
