@@ -159,7 +159,7 @@ class DatasetsController < ApplicationController
   def update
     respond_to do |format|
       if @dataset.update(dataset_params)
-        format.html { redirect_to dataset_url(@dataset), notice: "Dataset was successfully updated." }
+        format.html { redirect_to datasets_path, notice: "Dataset was successfully updated." }
         format.json { render :show, status: :ok, location: @dataset }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -28,8 +28,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <div class="w3-bar w3-black w3-card w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
     <%= link_to 'Home' , root_path, class: "w3-bar-item w3-button w3-padding-large w3-white" %>
+    <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
     <% if user_signed_in? %>
-      <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
       <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
       <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
       <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-hide-small w3-padding-large w3-black w3-hover-white" %>
@@ -47,11 +47,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
     <%= link_to 'Sources', sources_path, class: "w3-bar-item w3-button w3-padding-large" %>
-    <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-padding-large" %>
-    <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-padding-large" %>
-    <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-padding-large" %>
+    <% if user_signed_in? %>
+      <%= link_to 'Sessions', sessions_path, class: "w3-bar-item w3-button w3-padding-large" %>
+      <%= link_to 'Data', datasets_path, class: "w3-bar-item w3-button w3-padding-large" %>
+      <%= link_to 'Bands', bands_path, class: "w3-bar-item w3-button w3-padding-large" %>
+      <%= link_to 'Observations', observations_path, class: "w3-bar-item w3-button w3-padding-large" %>
+    <% end %>
     <%= link_to 'Publications', publications_path, class: "w3-bar-item w3-button w3-padding-large" %>
-    <%= link_to 'Observations', observations_path, class: "w3-bar-item w3-button w3-padding-large" %>
+    <% if user_signed_in? %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "w3-bar-item w3-button w3-padding-large" %>
+    <% else %>
+      <%= link_to 'Log in', new_user_session_path, class: "w3-bar-item w3-button w3-padding-large" %>
+    <% end %>
   </div>
 </div>
 
@@ -66,13 +73,20 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <!-- Footer -->
 <footer class="w3-container w3-padding-64 w3-center w3-opacity">  
-  <div class="w3-xlarge w3-padding-32">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <div class="w3-xlarge w3-padding-32 w3-center">
+    <div class="w3-row">
+      <div class="w3-col w3-container" style="width:15%"></div>
+      <%= link_to(image_tag("astro_wue", height: "60"), "https://www.physik.uni-wuerzburg.de/astro/startseite/",{class: "w3-hover-none w3-col w3-container",style: "width:10%", target: "_blank", rel:"noopener noreferrer"}) %>
+      <div class="w3-col w3-container" style="width:5%"></div>
+      <%= link_to(image_tag("mpi", height: "60"), "https://www.mpifr-bonn.mpg.de/",{class: "w3-hover-none w3-col w3-container",style: "width:10%", target: "_blank", rel:"noopener noreferrer"}) %>
+      <div class="w3-col w3-container" style="width:5%"></div>
+      <%= link_to(image_tag("uni_wue", height: "60"), "https://www.physik.uni-wuerzburg.de/astro/startseite/",{class: "w3-hover-none w3-col w3-container",style: "width:10%", target: "_blank", rel:"noopener noreferrer"}) %>
+      <div class="w3-col w3-container" style="width:5%"></div>
+      <%= link_to(image_tag("nasa", height: "60"), "https://www.nasa.gov/goddard/",{class: "w3-hover-none w3-col w3-container",style: "width:10%", target: "_blank", rel:"noopener noreferrer"}) %>
+      <div class="w3-col w3-container" style="width:5%"></div>
+      <%= link_to(image_tag("csiro", height: "60"), "https://www.atnf.csiro.au/",{class: "w3-hover-none w3-col w3-container",style: "width:10%", target: "_blank", rel:"noopener noreferrer"}) %>
+      <div class="w3-col w3-container" style="width:15%"></div>
+    </div>
  </div>
  <p>© 2023 Copyright: University of Würzburg</p>
 </footer>

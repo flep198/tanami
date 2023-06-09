@@ -24,7 +24,10 @@
     </thead>
 
     <tbody>
-      <% @sources.order(:be1950name).each do |source| %>
+
+      <% source_selection=get_source_selection(@sources,user_signed_in?)%>
+
+      <% source_selection.order(:be1950name).each do |source| %>
         <tr>
           <td><%= link_to source.be1950name, source %></td>
           <td><%= source.alt_name %></td>
@@ -47,8 +50,10 @@
 </div>
 
   <br>
-
-  <%= link_to 'New Source', new_source_path, class: "w3-btn w3-blue" %>
-  
+<% if user_signed_in?%>
+  <% if current_user.delete_permission %>
+    <%= link_to 'New Source', new_source_path, class: "w3-btn w3-blue" %>
+  <% end %>
+<% end %>
 </div>
 </div>
