@@ -288,6 +288,7 @@ for i in range(len(files)):
 
     #Plot date
     time = hdu_list[0].header["DATE-OBS"]
+    time = time.split("T")[0]
     time = time.split("/")
     if len(time)==1:
         date = time[0]
